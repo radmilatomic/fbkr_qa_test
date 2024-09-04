@@ -76,7 +76,7 @@ class BasePage:
         :return:
         """
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((locator[0], locator[1])),
-                                             message="ELEMENT NOT FOUND: {0}".format(locator[2])).click()
+                                             message="ELEMENT NOT FOUND OR NOT CLICKABLE: {0}".format(locator[2])).click()
 
     def default_wait(self, default_wait_time=1):
         time.sleep(default_wait_time)
@@ -113,11 +113,11 @@ class BasePage:
                                                         locator[2])).is_displayed()
 
     def fill_input_field(self, locator, text):
-        # self.click_on_element(locator)
+        self.click_on_element(locator)
         input_element = self.find_element(locator)
-        # input_element.send_keys(Keys.LEFT_CONTROL, "a")
-        # input_element.send_keys(Keys.DELETE)
-        # self.default_wait(1)
+        input_element.send_keys(Keys.LEFT_CONTROL, "a")
+        input_element.send_keys(Keys.DELETE)
+        self.default_wait(1)
         input_element.send_keys(text)
 
     def find_element(self, locator):
