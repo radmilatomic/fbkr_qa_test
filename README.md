@@ -1,15 +1,15 @@
-# FBKR TEST AUTOMATION FRAMEWORK
+## FBKR TEST AUTOMATION FRAMEWORK
 This is an automation framework to be used to develop tests for FishingBooker test.
 Framework includes ***UI*** tests.
 Framework is python based, it uses pytest library.
 
-# PREREQUISITES:
+## PREREQUISITES:
 Before cloning the project following dependencies need to be installed:
 - **git** 
 - **python3**
 - **pip3** 
 
-# SETUP:
+## SETUP:
 After the prerequisites are installed, clone this project into your working
 directory.
 
@@ -20,7 +20,7 @@ directory.
 - run command `pip3 install -r requirements.txt` to install project based dependencies
 
 
-## How to run UI tests - examples:
+### How to run UI tests - examples:
 
 **How to run a test (login test used for an example)**
 1. Navigate to <path/to/project>/fbkr_qa_test
@@ -48,7 +48,7 @@ directory.
 3. Navigate to <path/to/project>/fbkr_qa_test/test_cases/ui
 4. Run command `PYTHONPATH=$PY test -k "test_" --mode headless -s` 
 
-# STRUCTURE:
+## STRUCTURE:
 **libraries** folder -> Place for common methods and classes to be used across all the
 tests<br>
 **test_cases** folder-> Place where all the test cases are written. Module used for 
