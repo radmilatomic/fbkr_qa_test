@@ -1,16 +1,15 @@
 import logging
 import traceback
-from functools import wraps
 
 
 
 class ErrorHandler:
 
     @classmethod
-    def ui_error_handler(cls, func):
+    def error_handler(cls, func):
         """
         Decorator for error handling during the UI tests.
-        Return the exception and take a screenshot on problematic screen.
+        Returns the exception.
         :param func: function to handle exception and take screenshots
         :return: if error occurs function with handled exceptions else input function
         """

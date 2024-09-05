@@ -1,8 +1,9 @@
 import pytest
 
 from libraries.logger import Logger
-from ui.utilities import browser
 from libraries.properties import get_property
+from ui.utilities import browser
+
 
 def pytest_addoption(parser):
     parser.addoption('--browser', action='store', default='chrome')
@@ -14,6 +15,7 @@ def setup(request):
     logger = Logger()
     Logger.log_set_up(logger, request.node.name)
     request.cls.logger = logger
+    request.cls.test_name = request.node.name
 
     browser_name = request.config.getoption('browser')
     mode = request.config.getoption('mode')
@@ -32,6 +34,3 @@ def setup(request):
     Logger.log_tear_down(logger, request.node.name)
     browser.shut_down()
     logger.remove_handlers()
-
-
-

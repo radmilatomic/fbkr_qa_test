@@ -7,66 +7,24 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# from Libraries.Properties import Properties
-# from Libraries.TestEnvironmentManager import TestEnvironmentManager
-
 
 class BasePage:
 
-    def __init__(self, driver):
+    def __init__(self, driver, test_name):
         """
         Base class is serving basic attributes for every single page inherited from Page class
         :param driver: driver used for manipulation with web browser
         """
         self.driver = driver
+        self.test_name = test_name
         self.timeout = 30
-        self.default_wait_in_seconds=10
+        self.default_wait_in_seconds = 10
 
     # Locators
 
-    BODY = (
-        By.TAG_NAME,
-        "body",
-        'html body element')
-
-    CLOSE_MODAL_BUTTON = (
-        By.XPATH,
-        "//span[text()='close']",
-        'close modal button')
-
-    CONFIRM_MODAL = (
-        By.XPATH,
-        "//button[contains(@class,'cp-confirm-yes')]",
-        'confirm modal button')
-
-    ERROR_403 = (
-        By.XPATH,
-        "//h1[text()='403']",
-        '403 error')
-
-    LOADER = (
-        By.XPATH,
-        "//div[contains(@class,'cp-loader')]",
-        ' creative pool spinner')
-
-    MODAL_TITLE = (
-        By.XPATH,
-        "//div[@id='alert-dialog-title']",
-        'modal title')
-
-    TOAST_MESSAGE = (
-        By.XPATH,
-        "//div[contains(@class,'success')]/div[contains(@class,'toast-body')]",
-        'toast message')
-
-    VALIDATOR_ANIMATION = (
-        By.XPATH,
-        "//div[contains(@class,'progress stripes animated reverse slower')]",
-        'validator stripe animation')
-
     # Actions
     def assert_msg(self, message):
-        # self.driver.get_screenshot_as_file(TestEnvironmentManager.log_file_folder + '/assert_error.png')
+        self.driver.get_screenshot_as_file(self.test_name + '.png')
         return message
 
     def click_on_element(self, locator):
@@ -75,8 +33,9 @@ class BasePage:
         :param locator: Web element locator.
         :return:
         """
-        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((locator[0], locator[1])),
-                                             message="ELEMENT NOT FOUND OR NOT CLICKABLE: {0}".format(locator[2])).click()
+        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((locator[0], locator[1])),
+                                             message="ELEMENT NOT FOUND OR NOT CLICKABLE: {0}".format(
+                                                 locator[2])).click()
 
     def default_wait(self, default_wait_time=1):
         time.sleep(default_wait_time)
@@ -87,8 +46,8 @@ class BasePage:
         :param locator: Web element locator.
         :return: Boolean
         """
-        return WebDriverWait(self.driver, 5).until(EC.invisibility_of_element_located((locator[0], locator[1])),
-                                                   message="ELEMENT SHOULD NOT BE VISIBLE: {0}".format(locator[2]))
+        return WebDriverWait(self.driver, 10).until(EC.invisibility_of_element_located((locator[0], locator[1])),
+                                                    message="ELEMENT SHOULD NOT BE VISIBLE: {0}".format(locator[2]))
 
     def element_visible_condition(self, locator):
         """
@@ -108,7 +67,7 @@ class BasePage:
         :param locator: Web element locator.
         :return: Boolean
         """
-        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((locator[0], locator[1])),
+        return WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((locator[0], locator[1])),
                                                     message="ELEMENT NOT VISIBLE: {0}".format(
                                                         locator[2])).is_displayed()
 
@@ -148,29 +107,12 @@ class BasePage:
         """
         return self.driver
 
-    def get_title(self):
-        """
-        Get web title from a page.
-        :return: web page title.
-        """
-        return self.driver.title
-
     def get_url(self):
         """
         Returns current full URL.
         :return: current web page URL.
         """
         return self.driver.current_url
-
-    def hover(self, locator):
-        """
-        Hovers over web page element.
-        :param locator: Web element locator.
-        :return:
-        """
-        element = self.find_element(locator)
-        hover = ActionChains(self.driver).move_to_element(element)
-        hover.perform()
 
     def loading_done(self, locator):
         """
@@ -181,7 +123,3 @@ class BasePage:
         self.default_wait(2)  # added for firefox slow response
         return WebDriverWait(self.driver, 60).until(EC.invisibility_of_element_located((locator[0], locator[1])),
                                                     message="ELEMENT STILL VISIBLE: {0}".format(locator[2]))
-
-    def scroll_to_bottom(self):
-        body = self.find_element(self.BODY)
-        body.send_keys(Keys.END)

@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 
 from ui.pages.base_page import BasePage
-from ui.utilities import browser
 
 
 class LoginPage(BasePage):
@@ -31,20 +30,17 @@ class LoginPage(BasePage):
         "//button[text()='Log in']",
         "Login button to submit credentials")
 
+    NAVIGATION_USERNAME_BUTTON = (
+        By.XPATH,
+        "//a[@data-testid='navigation-username-button']",
+        "navigation username button")
+
     # Actions
     def login(self):
         self.click_on_element(self.LOGIN_BUTTON_FOR_DIALOGUE)
-        self.fill_input_field(self.EMAIL_INPUT,'rada1007+2@gmail.com')
+        self.fill_input_field(self.EMAIL_INPUT, 'rada1007+2@gmail.com')
         self.click_on_element(self.CONTINUE_WITH_EMAIL_BUTTON)
-        self.fill_input_field(self.PASSWORD_INPUT,'fbkrqatestpass')
+        self.fill_input_field(self.PASSWORD_INPUT, 'fbkrqatestpass')
         self.click_on_element(self.LOGIN_BUTTON_SUBMIT)
-        browser.sleep_for_n_seconds(2)
+        self.element_visible_on_page(self.NAVIGATION_USERNAME_BUTTON)
         # browser.open_url('https://qahiringtask.dev.fishingbooker.com')
-
-
-
-
-
-
-
-

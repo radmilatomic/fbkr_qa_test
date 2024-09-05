@@ -45,6 +45,12 @@ class SearchResultsPage(BasePage):
         "//div[contains(@class,'lds-spin')]",
         "loader")
 
+    LOADER_DOTS = (
+        By.ID,
+        "search-result-loader",
+        "loader dots")
+
+
     def filter_option(self, option):
         locator = (
             By.XPATH,
@@ -52,13 +58,15 @@ class SearchResultsPage(BasePage):
             f"filter option {option}")
         return locator
 
-    def select_filters(self,filter_array):
+    def show_charters_number_button(self, button_text):
+        locator = (
+            By.XPATH,
+            f"//button[text()='{button_text}']",
+            f"{button_text} button ")
+        return locator
+
+    def select_filters(self, filter_array):
+        current_filter_text = self.find_element(self.SHOW_CHARTERS_BUTTON).text
         for filter_array_item in filter_array:
             self.click_on_element(self.filter_option(filter_array_item))
-
-
-
-
-
-
-
+        self.loading_done(self.show_charters_number_button(current_filter_text))

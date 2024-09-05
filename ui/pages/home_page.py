@@ -15,7 +15,6 @@ class HomePage(BasePage):
         "date-picker",
         "date picker input")
 
-
     AVAILABLE_DATE = (
         By.XPATH,
         "//button[contains(@class,'rdp-button') and not (contains(@class,'rdp-day_disabled'))]",
@@ -30,7 +29,6 @@ class HomePage(BasePage):
         By.XPATH,
         "//button[@id='adults-minus']/following-sibling::div/strong",
         "number of preselected adults")
-
 
     ADD_ADULTS_BUTTON = (
         By.ID,
@@ -62,9 +60,6 @@ class HomePage(BasePage):
         "//div[a[@data-testid='search-form-check-availability-button']]",
         "check availabilty button on home page")
 
-
-
-
     def search_dropdown_option(self, entered_keyword):
         locator = (
             By.XPATH,
@@ -73,12 +68,12 @@ class HomePage(BasePage):
         return locator
 
     def select_group(self, group_data):
-        number_of_preselected_adults=int(self.find_element(self.NUMBER_OF_PRESELECTED_ADULTS).text)
+        number_of_preselected_adults = int(self.find_element(self.NUMBER_OF_PRESELECTED_ADULTS).text)
         number_of_preselected_children = int(self.find_element(self.NUMBER_OF_PRESELECTED_CHILDREN).text)
-        if group_data[0]-number_of_preselected_adults<0:
+        if group_data[0] - number_of_preselected_adults < 0:
             for iteration in range(number_of_preselected_adults - group_data[0]):
                 self.click_on_element(self.REMOVE_ADULTS_BUTTON)
-        elif group_data[0]-number_of_preselected_adults>0:
+        elif group_data[0] - number_of_preselected_adults > 0:
             for iteration in range(group_data[0] - number_of_preselected_adults):
                 self.click_on_element(self.ADD_ADULTS_BUTTON)
 
@@ -88,3 +83,13 @@ class HomePage(BasePage):
         elif group_data[1] - number_of_preselected_adults > 0:
             for iteration in range(group_data[1] - number_of_preselected_children):
                 self.click_on_element(self.ADD_CHILDREN_BUTTON)
+
+    def fill_out_search_form(self, input_data):
+        self.fill_input_field(self.SEARCH_INPUT, input_data["destination"])
+        self.find_elements(self.search_dropdown_option(input_data["destination"]))[0].click()
+        self.click_on_element(self.DATE_PICKER_INPUT)
+        available_date_class = self.find_element(self.AVAILABLE_DATE).get_attribute('class')
+        if 'selected' not in available_date_class:
+            self.click_on_element(self.AVAILABLE_DATE)
+        self.click_on_element(self.GROUP_SIZE_INPUT)
+        self.select_group(input_data["group"])
