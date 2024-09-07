@@ -16,16 +16,12 @@ def setup(request):
     Logger.log_set_up(logger, request.node.name)
     request.cls.logger = logger
     request.cls.test_name = request.node.name
-
     browser_name = request.config.getoption('browser')
     mode = request.config.getoption('mode')
-
     browser.create_new_driver(browser_name, mode)
-
     Logger.log_method_name(logger, request.node.name)
     url_with_credentials = get_property('FBKR_QA_INSTANCE_WITH_CREDENTIALS')
     url = get_property('FBKR_QA_INSTANCE')
-
     browser.open_url(url_with_credentials)
     browser.sleep_for_n_seconds(2)
     browser.open_url(url)

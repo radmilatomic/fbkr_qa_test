@@ -9,7 +9,6 @@ from ui.pages.charter_view_page import CharterViewPage
 from ui.pages.home_page import HomePage
 from ui.pages.login_page import LoginPage
 from ui.pages.search_result_page import SearchResultsPage
-
 from ui.utilities import browser
 
 
@@ -24,7 +23,7 @@ class TestMessageCaptain:
         :param
         :return:
         """
-        input_data=message_captain_test_data
+        input_data = message_captain_test_data
         home_page = HomePage(browser.WEB_DRIVER, self.test_name)
         self.logger.log_info("Filling up search fields.")
         home_page.fill_out_search_form(input_data)

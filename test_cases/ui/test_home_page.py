@@ -1,11 +1,11 @@
 import pytest
 
+from selenium.webdriver.common.by import By
+
 from libraries.error_handler import ErrorHandler
 from test_data.search_keywords import search_keywords
 from ui.pages.home_page import HomePage
 from ui.utilities import browser
-
-from selenium.webdriver.common.by import By
 
 
 @pytest.mark.usefixtures("setup")
@@ -45,6 +45,7 @@ class TestHomePage:
         :param
         :return:
         """
+
         @ErrorHandler.error_handler
         def autosuggestion_on_search_method():
             home_page = HomePage(browser.WEB_DRIVER, self.test_name)
@@ -61,4 +62,5 @@ class TestHomePage:
                 assert search_keyword in suggestion_text, home_page.assert_msg(
                     f"suggestion text :'{suggestion_text}' has no '{search_keyword}' keyword in it")
             self.logger.log_info(f"All search suggestions contain keyword '{search_keyword}'")
+
         autosuggestion_on_search_method()

@@ -46,22 +46,6 @@ class Logger:
     def remove_handlers(self):
         self.logger.removeHandler(self.stdout_handler)
 
-    def log_status_code(self, request_type, status_code):
-        self.logger.info("********************************************************************************************")
-        self.logger.info("Response status code after {0} request: {1}".format(request_type, status_code))
-
     def log_assert_message(self, message):
-        self.logger.error(message)
-        return message
-
-    def status_code_assert(self, response_type, received, expected):
-        message = "{0} request response status code not correct." \
-            "Received: {1}, expected: {2}".format(response_type, received, expected)
-        self.logger.info("********************************************************************************************")
-        self.logger.error(message)
-        return message
-
-    def response_text_assert(self, received, expected):
-        message = "Response text not correct. Received: {0}, expected: {1}".format(received, expected)
         self.logger.error(message)
         return message

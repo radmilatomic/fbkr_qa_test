@@ -1,8 +1,6 @@
 import time
 
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -19,7 +17,6 @@ class BasePage:
         self.test_name = test_name
         self.timeout = 30
         self.default_wait_in_seconds = 10
-
 
     # Actions
 
@@ -99,20 +96,6 @@ class BasePage:
                                                         message="ELEMENT NOT FOUND: {0}".format(locator[2]))
         except TimeoutException:
             return []
-
-    def get_driver(self):
-        """
-        Getter for driver.
-        :return: driver
-        """
-        return self.driver
-
-    def get_url(self):
-        """
-        Returns current full URL.
-        :return: current web page URL.
-        """
-        return self.driver.current_url
 
     def loading_done(self, locator):
         """

@@ -66,7 +66,6 @@ class CharterViewPage(BasePage):
         "//select[@id='cf-packages']/option",
         "trip select options")
 
-
     # Locator methods
 
     def dropdown_option(self, option):
@@ -87,10 +86,8 @@ class CharterViewPage(BasePage):
             self.find_elements(self.CURRENT_MONTH_DATE)[-1].click()
         else:
             last_current_date_element.click()
-
         self.click_on_element(self.GROUP_SIZE)
         self.click_on_element(self.dropdown_option("2 persons"))
-
         self.click_on_element(self.TRIPS_SELECT_OPTIONS)
         self.find_elements(self.TRIPS_SELECT_OPTIONS)[-1].click()
         self.default_wait(2)

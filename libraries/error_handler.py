@@ -2,7 +2,6 @@ import logging
 import traceback
 
 
-
 class ErrorHandler:
 
     @classmethod
@@ -20,7 +19,7 @@ class ErrorHandler:
             except Exception as e:
                 error = e
                 logging.getLogger('FBKR_LOGGER').error(f'An error occurred: {error}')
-                logging.getLogger('XBOT_LOGGER').error(f'Error traceback: {traceback.format_exc()}')
+                logging.getLogger('FBKR_LOGGER').error(f'Error traceback: {traceback.format_exc()}')
             assert False, error
 
         return new_func

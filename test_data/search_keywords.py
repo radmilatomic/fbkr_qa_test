@@ -1,1 +1,1 @@
-search_keywords=["Florida","Belgrade","India"]
+search_keywords = ["Florida", "Belgrade", "India"]

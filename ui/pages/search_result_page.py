@@ -36,7 +36,6 @@ class SearchResultsPage(BasePage):
         "//button[contains(text(),'Show') and contains(text(),'charters')]",
         "show charters button")
 
-
     # Locator methods
 
     def filter_option(self, option):

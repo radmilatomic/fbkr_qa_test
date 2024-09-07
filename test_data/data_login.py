@@ -7,5 +7,3 @@ negative_login_data = [
     ("rada1008+2@gmail.com", "fbkrqatestpass"),
     ("tester@gmail.com", "random_pass")
 ]
-
-
