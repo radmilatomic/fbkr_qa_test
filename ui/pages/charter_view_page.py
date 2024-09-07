@@ -5,6 +5,32 @@ from ui.pages.base_page import BasePage
 
 class CharterViewPage(BasePage):
     # Locators
+
+    CONTACT_DATE_PICKER = (
+        By.XPATH,
+        "//div[input[@id='cf-trip-date']]",
+        "date picker on contact captain form")
+
+    CONTACT_TEXTAREA = (
+        By.ID,
+        "contact-textarea",
+        "contact textarea")
+
+    CREATE_NEW_INQUIRY = (
+        By.XPATH,
+        "//button[contains(text(),'Create new inquiry')]",
+        "create new inquiry button")
+
+    CURRENT_MONTH_DATE = (
+        By.XPATH,
+        "//td[contains(@class,'rdtDay') and not(contains(@class,'rdtOld')) and not(contains(@class,'rdtNew'))]",
+        "date picker on contact captain form")
+
+    GROUP_SIZE = (
+        By.ID,
+        "cf-group-size",
+        "group size select")
+
     MESSAGE_CAPTAIN_BUTTON = (
         By.ID,
         "contact-captain",
@@ -15,62 +41,42 @@ class CharterViewPage(BasePage):
         "//div[contains(@class,'modal-header')][h3[contains(text(),'Contact')]]",
         "message captain modal")
 
-    CREATE_NEW_INQUIRY = (
+    MESSAGE_SENT_INFO = (
         By.XPATH,
-        "//button[contains(text(),'Create new inquiry')]",
-        "create new inquiry button")
-
-    CONTACT_DATE_PICKER = (
-        By.XPATH,
-        "//div[input[@id='cf-trip-date']]",
-        "date picker on contact captain form")
-
-    CURRENT_MONTH_DATE = (
-        By.XPATH,
-        "//td[contains(@class,'rdtDay') and not(contains(@class,'rdtOld')) and not(contains(@class,'rdtNew'))]",
-        "date picker on contact captain form")
+        "//b[contains(text(),'Message Sent!')]",
+        "message sent info")
 
     NEXT_MONTH_ARROW = (
         By.XPATH,
         "//th[contains(@class,'rdtNext')]",
         "next month arrow")
 
-    GROUP_SIZE = (
-        By.ID,
-        "cf-group-size",
-        "group size select")
-
-    GROUP_SIZE_OPTION = (
+    SEND_MESSAGE_BUTTON = (
         By.XPATH,
-        "//option[contains(text(),'2 persons')]",
-        "2 person group size")
+        "//button[text()='Send Message']",
+        "send message button")
 
     TRIPS_SELECT = (
         By.ID,
         "cf-packages",
         "trip select")
 
-    TRIPS_SELECT_OPTION = (
+    TRIPS_SELECT_OPTIONS = (
         By.XPATH,
         "//select[@id='cf-packages']/option",
         "trip select options")
 
-    CONTACT_TEXTAREA = (
-        By.ID,
-        "contact-textarea",
-        "contact textarea")
 
-    SEND_MESSAGE_BUTTON = (
-        By.XPATH,
-        "//button[text()='Send Message']",
-        "send message button")
+    # Locator methods
 
-    MESSAGE_SENT_INFO = (
-        By.XPATH,
-        "//b[contains(text(),'Message Sent!')]",
-        "message sent info")
+    def dropdown_option(self, option):
+        locator = (
+            By.XPATH,
+            f"//option[contains(text(),'{option}')]",
+            f"option {option}")
+        return locator
 
-    # //button[text()='Send Message']
+    # Actions
 
     def fill_out_captain_message_dialogue(self, message):
         self.find_element(self.CONTACT_DATE_PICKER).click()
@@ -83,9 +89,9 @@ class CharterViewPage(BasePage):
             last_current_date_element.click()
 
         self.click_on_element(self.GROUP_SIZE)
-        self.click_on_element(self.GROUP_SIZE_OPTION)
+        self.click_on_element(self.dropdown_option("2_persons"))
 
-        self.click_on_element(self.TRIPS_SELECT_OPTION)
-        self.find_elements(self.TRIPS_SELECT_OPTION)[-1].click()
+        self.click_on_element(self.TRIPS_SELECT_OPTIONS)
+        self.find_elements(self.TRIPS_SELECT_OPTIONS)[-1].click()
         self.default_wait(2)
         self.fill_input_field(self.CONTACT_TEXTAREA, message)

@@ -5,61 +5,56 @@ from ui.pages.base_page import BasePage
 
 class HomePage(BasePage):
     # Locators
-    SEARCH_INPUT = (
-        By.XPATH,
-        "//input[@data-testid='search-form-input-field']",
-        "search button on home page")
-
-    DATE_PICKER_INPUT = (
-        By.ID,
-        "date-picker",
-        "date picker input")
-
-    AVAILABLE_DATE = (
-        By.XPATH,
-        "//button[contains(@class,'rdp-button') and not (contains(@class,'rdp-day_disabled'))]",
-        "first available date")
-
-    GROUP_SIZE_INPUT = (
-        By.ID,
-        "group-size-picker-input",
-        "group-size-picker-input")
-
-    NUMBER_OF_PRESELECTED_ADULTS = (
-        By.XPATH,
-        "//button[@id='adults-minus']/following-sibling::div/strong",
-        "number of preselected adults")
 
     ADD_ADULTS_BUTTON = (
         By.ID,
         "adults-plus",
         "add adults button")
 
-    REMOVE_ADULTS_BUTTON = (
-        By.ID,
-        "adults-minus",
-        "remove adults button")
-
-    NUMBER_OF_PRESELECTED_CHILDREN = (
-        By.XPATH,
-        "//button[@id='children-minus']/following-sibling::div/strong",
-        "number of preselected adults")
-
     ADD_CHILDREN_BUTTON = (
         By.ID,
         "children-plus",
         "add children button")
 
-    REMOVE_CHILDREN_BUTTON = (
-        By.ID,
-        "children-minus",
-        "remove children button")
+    AVAILABLE_DATE = (
+        By.XPATH,
+        "//button[contains(@class,'rdp-button') and not (contains(@class,'rdp-day_disabled'))]",
+        "first available date")
 
     CHECK_AVAILABILITY_BUTTON = (
         By.XPATH,
         "//div[a[@data-testid='search-form-check-availability-button']]",
         "check availabilty button on home page")
 
+    GROUP_SIZE_INPUT = (
+        By.ID,
+        "group-size-picker-input",
+        "group-size-picker-input")
+
+    DATE_PICKER_INPUT = (
+        By.ID,
+        "date-picker",
+        "date picker input")
+
+    NUMBER_OF_PRESELECTED_ADULTS = (
+        By.XPATH,
+        "//button[@id='adults-minus']/following-sibling::div/strong",
+        "number of preselected adults")
+
+    NUMBER_OF_PRESELECTED_CHILDREN = (
+        By.XPATH,
+        "//button[@id='children-minus']/following-sibling::div/strong",
+        "number of preselected adults")
+
+    REMOVE_ADULTS_BUTTON = (
+        By.ID,
+        "adults-minus",
+        "remove adults button")
+
+    REMOVE_CHILDREN_BUTTON = (
+        By.ID,
+        "children-minus",
+        "remove children button")
 
     SEARCH_FORM_INPUT_CLEAR_BUTTON = (
         By.XPATH,
@@ -71,12 +66,22 @@ class HomePage(BasePage):
         "//div[@data-testid='search-form-search-results-dropdown']",
         "Destination Search results dropdown")
 
+    SEARCH_INPUT = (
+        By.XPATH,
+        "//input[@data-testid='search-form-input-field']",
+        "search button on home page")
+
+
+    # Locator methods
+
     def search_dropdown_option(self, entered_keyword):
         locator = (
             By.XPATH,
             "//span[text()='{0}']".format(entered_keyword),
             "dropdown option {0}".format(entered_keyword))
         return locator
+
+    # Actions
 
     def select_group(self, group_data):
         number_of_preselected_adults = int(self.find_element(self.NUMBER_OF_PRESELECTED_ADULTS).text)

@@ -20,11 +20,11 @@ class BasePage:
         self.timeout = 30
         self.default_wait_in_seconds = 10
 
-    # Locators
 
     # Actions
+
     def assert_msg(self, message):
-        self.driver.get_screenshot_as_file(self.test_name + '.png')
+        self.driver.get_screenshot_as_file(f"../../test_reports/{self.test_name}.png")
         return message
 
     def click_on_element(self, locator):

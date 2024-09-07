@@ -22,18 +22,17 @@ directory.
 
 ### How to run UI tests - examples:
 
-**How to run a test (login test used for an example)**
+**How to run a single test**
 1. Navigate to <path/to/project>/fbkr_qa_test
 2. Export path variable `PY=$(pwd)`
 3. Navigate to <path/to/project>/fbkr_qa_test/test_cases/ui
-4. Run command `PYTHONPATH=$PY pytest test_login_positive`
+4. Run command `PYTHONPATH=$PY pytest -k "test_message_captain" -s`
 
-**How to run a test with -k flag**<br>
--k flag will run all tests that have the following keyword in their name
+**How to run a test with by specifying browser**<br>
 1. Navigate to <path/to/project>/fbkr_qa_test
 2. Export path variable `PY=$(pwd)`
 3. Navigate to <path/to/project>/fbkr_qa_test/test_cases/ui
-4. Run command `PYTHONPATH=$PY pytest  -k "test_home"`
+4. Run command `PYTHONPATH=$PY pytest  -k "test_message_captain" --browser chrome`
 
 **How to run all tests from one folder**<br>
 -k flag will run all tests that have the following keyword in their name, so it is enough to run the following command
@@ -46,7 +45,19 @@ directory.
 1. Navigate to <path/to/project>/fbkr_qa_test
 2. Export path variable `PY=$(pwd)`
 3. Navigate to <path/to/project>/fbkr_qa_test/test_cases/ui
-4. Run command `PYTHONPATH=$PY test -k "test_" --mode headless -s` 
+4. Run command `PYTHONPATH=$PY test -k "test_message_captain" --mode headless -s` 
+
+**How to run same test several times:**<br>
+1. Navigate to <path/to/project>/fbkr_qa_test
+2. Export path variable `PY=$(pwd)`
+3. Navigate to <path/to/project>/fbkr_qa_test/test_cases/ui
+4. Run command `PYTHONPATH=$PY test -k "test_message_captain" --count=3 -s` 
+
+**How to run test and generate test report:**<br>
+1. Navigate to <path/to/project>/fbkr_qa_test
+2. Export path variable `PY=$(pwd)`
+3. Navigate to <path/to/project>/fbkr_qa_test/test_cases/ui
+4. Run command `PYTHONPATH=$PY pytest -k "test_" -s --html=../../test_reports/report_name.html -s` 
 
 ## STRUCTURE:
 **libraries** folder -> Place for common methods and classes to be used across all the
