@@ -89,7 +89,7 @@ class CharterViewPage(BasePage):
             last_current_date_element.click()
 
         self.click_on_element(self.GROUP_SIZE)
-        self.click_on_element(self.dropdown_option("2_persons"))
+        self.click_on_element(self.dropdown_option("2 persons"))
 
         self.click_on_element(self.TRIPS_SELECT_OPTIONS)
         self.find_elements(self.TRIPS_SELECT_OPTIONS)[-1].click()
