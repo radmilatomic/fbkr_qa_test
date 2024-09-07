@@ -60,6 +60,17 @@ class HomePage(BasePage):
         "//div[a[@data-testid='search-form-check-availability-button']]",
         "check availabilty button on home page")
 
+
+    SEARCH_FORM_INPUT_CLEAR_BUTTON = (
+        By.XPATH,
+        "//span[@data-testid='search-form-input-clear-button']",
+        "Clear search from input button")
+
+    SEARCH_FORM_SEARCH_RESULTS_DROPDOWN = (
+        By.XPATH,
+        "//div[@data-testid='search-form-search-results-dropdown']",
+        "Destination Search results dropdown")
+
     def search_dropdown_option(self, entered_keyword):
         locator = (
             By.XPATH,
