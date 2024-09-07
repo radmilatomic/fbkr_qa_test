@@ -71,6 +71,11 @@ class HomePage(BasePage):
         "//input[@data-testid='search-form-input-field']",
         "search button on home page")
 
+    SEARCH_SUGGESTION = (
+        By.XPATH,
+        "//div[contains(@data-testid,'search-form-suggestion')]/span",
+        "search button on home page")
+
 
     # Locator methods
 

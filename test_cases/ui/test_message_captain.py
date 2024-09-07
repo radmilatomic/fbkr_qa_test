@@ -4,6 +4,7 @@ import uuid
 import pytest
 
 from libraries.error_handler import ErrorHandler
+from test_data.test_message_captain import message_captain_test_data
 from ui.pages.charter_view_page import CharterViewPage
 from ui.pages.home_page import HomePage
 from ui.pages.login_page import LoginPage
@@ -23,9 +24,7 @@ class TestMessageCaptain:
         :param
         :return:
         """
-        with open('../../test_data/test_message_captain.json') as test_data:
-            input_data = json.load(test_data)
-
+        input_data=message_captain_test_data
         home_page = HomePage(browser.WEB_DRIVER, self.test_name)
         self.logger.log_info("Filling up search fields.")
         home_page.fill_out_search_form(input_data)
